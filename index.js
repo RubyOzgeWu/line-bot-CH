@@ -11,11 +11,11 @@ const bot = linebot({
 })
 
 bot.on('message', (event) => {
-  if (data.restaurants.length === 0) {
+  if (data.courses.length === 0) {
     event.reply('資料讀取中，請稍後再試')
   } else if (event.message.type === 'text') {
-    if (event.message.text === '高雄') {
-      data.replyRestaurants(event)
+    if (event.message.text === '共通課程') {
+      data.replyCourses(event)
     }
   }
 })
