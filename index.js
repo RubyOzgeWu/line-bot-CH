@@ -11,15 +11,26 @@ const bot = linebot({
 })
 
 bot.on('message', (event) => {
-  if (data.courses.length === 0) {
+  if (data.restaurants.length === 0) {
     event.reply('資料讀取中，請稍後再試')
-  } else if (event.message.type === 'text') {
-    if (event.message.text === '共通課程') {
-      data.replyCourses(event)
+  } else if (event.message.type == 'text') {
+    for (const restaurant of data.restaurants) {
+      // 依料理種類
+      if (event.message.text === restaurant[3]) {
+        data.replyRestaurants(event)
+      }
+      // 依餐廳所在城市
+      else if (event.message.text === restaurant[2]) {
+        data.replyRestaurants(event)
+      }
+      // 依餐廳名稱
+      else if (event.message.text === restaurant[0]) {
+        data.replyMap(event)
+      }
     }
   }
 })
 
-bot.listen('/', process.env.PORT || 4000, () => {
-  console.log('機器人啟動')
+bot.listen('/', process.env.PORT || 3000, () => {
+  console.log('機器人啟動123456')
 })
