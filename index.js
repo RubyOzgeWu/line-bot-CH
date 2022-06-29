@@ -13,20 +13,9 @@ const bot = linebot({
 bot.on('message', (event) => {
   if (data.restaurants.length === 0) {
     event.reply('資料讀取中，請稍後再試')
-  } else if (event.message.type == 'text') {
-    for (const restaurant of data.restaurants) {
-      // 依料理種類
-      if (event.message.text === restaurant[3]) {
-        data.replyRestaurants(event)
-      }
-      // 依餐廳所在城市
-      else if (event.message.text === restaurant[2]) {
-        data.replyRestaurants(event)
-      }
-      // 依餐廳名稱
-      else if (event.message.text === restaurant[0]) {
-        data.replyMap(event)
-      }
+  } else if (event.message.type === 'text') {
+    if (event.message.text === '高雄') {
+      data.replyRestaurants(event)
     }
   }
 })

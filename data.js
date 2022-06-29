@@ -11,25 +11,25 @@ const fetchData = async () => {
     const page = []
     page[0] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=1')
     page[1] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=2')
-    page[2] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=3')
-    page[3] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=4')
-    page[4] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=5')
-    page[5] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=6')
-    page[6] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=7')
-    page[7] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=8')
-    page[8] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=9')
-    page[9] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=10')
-    page[10] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=11')
-    page[11] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=12')
-    page[12] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=13')
-    page[13] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=14')
-    page[14] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=15')
-    page[15] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=16')
-    page[16] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=17')
-    page[17] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=18')
-    page[18] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=19')
-    page[19] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=20')
-    page[20] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=21')
+    // page[2] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=3')
+    // page[3] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=4')
+    // page[4] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=5')
+    // page[5] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=6')
+    // page[6] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=7')
+    // page[7] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=8')
+    // page[8] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=9')
+    // page[9] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=10')
+    // page[10] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=11')
+    // page[11] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=12')
+    // page[12] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=13')
+    // page[13] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=14')
+    // page[14] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=15')
+    // page[15] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=16')
+    // page[16] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=17')
+    // page[17] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=18')
+    // page[18] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=19')
+    // page[19] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=20')
+    // page[20] = await axios.get('https://www.taiwan.net.tw/m1.aspx?sNo=0020118&page=21')
 
     for (const p of page) {
       const $ = cheerio.load(p.data)
@@ -55,10 +55,10 @@ const fetchData = async () => {
           // console.log(response.data.results[0].geometry.location.lat)
           r.push(response.data.results[0].geometry.location.lat)
           r.push(response.data.results[0].geometry.location.lng)
-          console.log(restaurants);
+          console.log(restaurants)
         })
-        .catch((error) => {
-        //   console.log('error')
+        .catch(error => {
+          console.log(error)
         })
     }
   } catch (error) {
@@ -67,20 +67,7 @@ const fetchData = async () => {
 }
 
 const replyRestaurants = (event) => {
-  const findRestaurant = restaurants.filter(restaurant => {
-    if (restaurant[3] === event.message.text) {
-      return restaurant[3] === event.message.text
-    }
-    if (restaurant[2] === event.message.text) {
-      return restaurant[2] === event.message.text
-    }
-    if (restaurant[0] === event.message.text) {
-      return restaurant[0] === event.message.text
-    }
-  })
-  console.log(findRestaurant)
-
-  const bubbles = findRestaurant.map(restaurant => {
+  const bubbles = restaurants.map(restaurant => {
     const bubble = JSON.parse(JSON.stringify(template))
     bubble.body.contents[0].text = restaurant[0]
     bubble.body.contents[1].text = restaurant[3]
@@ -103,28 +90,29 @@ const replyRestaurants = (event) => {
   ])
 }
 
-const replyMap = (event) => {
-  // const restaurant=restaurants.includes(event.message.text )
-  const mapAPI = restaurants.filter(restaurant => {
-    if (restaurant[0] === event.message.text) {
-      return restaurant
-    }
-  })
-  for (const m of mapAPI) {
-    event.reply([
-      {
-        type: 'location',
-        title: m[0],
-        address: m[6],
-        latitude: m[7],
-        longitude: m[8]
-      }
-    ])
-  }
-}
+// const replyMap = (event) => {
+//   // const restaurant=restaurants.includes(event.message.text )
+//   const mapAPI = restaurants.filter(restaurant => {
+//     if (restaurant[0] === event.message.text) {
+//       return restaurant
+//     }
+//     return restaurant
+//   })
+//   for (const m of mapAPI) {
+//     event.reply([
+//       {
+//         type: 'location',
+//         title: m[0],
+//         address: m[6],
+//         latitude: m[7],
+//         longitude: m[8]
+//       }
+//     ])
+//   }
+// }
 export default {
   fetchData,
   restaurants,
-  replyRestaurants,
-  replyMap
+  replyRestaurants
+//   replyMap
 }
